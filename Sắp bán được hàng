@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+#f {
+  background-color: lightpink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#main {
+	display: flex;
+    gap: 400px;
+    justify-content: center;
+}
+#Content {
+	
+}
+#act {
+	color: blue;
+    cursor: pointer;
+}
+input#Find{
+	width: 500px;
+    border: 1px solid black;
+}
+</style>
+</head>
+<body>
+<div id="f">
+  <h1>Ok</h1>
+  <input type="text" id="Find">
+</div>
+<div id="main">
+	<div id="Content">
+    	<h2>Products</h2>
+        <div class="container" id="plist">
+        </div>
+    </div>
+    <div id="Manager">
+    	<h2>Manage</h2>
+        <label>Name of product</label>
+        <input type="text" id="name">
+        <label>Picture</label><br>
+        <input type="text" id="img"><br>
+        <label>Price</label><br>
+        <input type="text" id="price">
+        <div id="act">
+        	<p id="add">Thêm<p>
+            <p id="edit">Sửa<p>
+            <p id="del">Xóa<p>
+        </div>
+    </div>
+</div>
+<script>
+	const products=[
+    	{id:1, name:"Gấu", price:"100.000", des: "Gấu bông khủng long", img:"https://www.google.com.vn/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fmaskyon2%2Fmeme-cute%2F&psig=AOvVaw0Jf6Nmr2HRNCRJR-DlqCB5&ust=1756630926242000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjQmq2Wso8DFQAAAAAdAAAAABAE"},
+        {id:2, name:"Gấu", price:"100.000", des: "Gấu bông khủng long", img:"https://www.google.com.vn/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fmaskyon2%2Fmeme-cute%2F&psig=AOvVaw0Jf6Nmr2HRNCRJR-DlqCB5&ust=1756630926242000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjQmq2Wso8DFQAAAAAdAAAAABAE"},
+        {id:3, name:"Gấu", price:"100.000", des: "Gấu bông khủng long", img:"https://www.google.com.vn/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fmaskyon2%2Fmeme-cute%2F&psig=AOvVaw0Jf6Nmr2HRNCRJR-DlqCB5&ust=1756630926242000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjQmq2Wso8DFQAAAAAdAAAAABAE"},
+        {id:4, name:"Gấu", price:"100.000", des: "Gấu bông khủng long", img:"https://www.google.com.vn/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fmaskyon2%2Fmeme-cute%2F&psig=AOvVaw0Jf6Nmr2HRNCRJR-DlqCB5&ust=1756630926242000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjQmq2Wso8DFQAAAAAdAAAAABAE"},]
+	const container = document.getElementById("plist");
+	function Display() {
+    	container.innerHTML="";
+    	for(let i=0; i<products.length; i++){
+          let div=document.createElement("div");
+          div.classList.add("product");
+          div.innerHTML=`
+              <img src="${products[i].img}" alt="${products[i].name}">
+              <h3>${products[i].name}</h3>
+              <p class="price">${products[i].price}</p
+              <button onclick="mua(${products[i].id})">Mua ngay</button>
+    	`;
+        container.appendChild(div);
+    	};
+    Display();    
+    }
+    let add = document.getElementById("add");
+    add.addEventListener("click",()=>{
+        add.style.color="black";
+    }
+    let edit = document.getElementById("edit");
+    edit.addEventListener("click",()=>{
+        edit.style.color="black";
+    }
+    let del = document.getElementById("del");
+    del.addEventListener("click",()=>{
+        del.style.color="black";
+    } 
+</script>
+</body>
+</html>
