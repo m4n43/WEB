@@ -1,0 +1,87 @@
+<html>
+<head>
+<style>
+    body {
+        background-color: lightblue;
+    }
+    h1 {
+        color: black;
+        text-align: center;
+    }
+    #a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+    }
+    #b {
+        display: flex;
+        justify-content: center;
+        gap: 100px;
+        color: blue;
+        cursor: pointer;
+    }
+    p#x {
+        color: Blue;
+        text-align: center;
+        cursor: pointer;
+    }
+    #add {
+    	width: 200px;
+        border: 1px solid black;
+        text-align: center;
+    }
+    input{
+        width: 200px;
+        border: 1px solid black;
+    }
+</style>
+<title>Page Title</title>
+</head>
+<body>
+<div id="a">
+  <h1>SIGN IN</h1>
+  <p>Email or phone number</p>
+  <input type="text" id="myInput">
+  <div id="add">
+      
+  </div>
+  <p id="x">Forgot password?</p>
+</div>
+<div id="b">
+    <p id="c">Creat an account?</p>
+    <p id="n">Next?</p>
+</div>
+<script>
+    let p = document.getElementById("x");
+    account=document.getElementById("add");
+    p.addEventListener("click",()=>{
+        p.style.color="black";
+        val = Layinput();
+        alert("Email doi mat khau da gui den "+ val);
+    })
+    let c = document.getElementById("c");
+    c.addEventListener("click",()=>{
+        c.style.color="black";
+        
+    })
+    function Add() {
+        let input = document.createElement("input");
+        account.appendChild(input)
+    }
+    let n = document.getElementById("n");
+    n.addEventListener("click",()=>{
+        n.style.color="black";
+        console.log("create")
+        Add();
+    })
+    
+    function Layinput(){
+        let value = document.getElementById("myInput").value;
+        return value;
+    }
+</script>
+
+</body>
+</html>
+
