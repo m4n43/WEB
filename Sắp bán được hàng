@@ -12,7 +12,6 @@ h1 {
 }
 
 #f {
-  background-color: lightpink;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,6 +27,8 @@ h1 {
 #act {
 	color: blue;
     cursor: pointer;
+    display: flex;
+    gap: 20px;
 }
 input#Find{
 	width: 500px;
@@ -48,25 +49,27 @@ input#Find{
     </div>
     <div id="Manager">
     	<h2>Manage</h2>
-        <label>Name of product</label>
-        <input type="text" id="name">
+        <label>ID</label><br>
+        <input type="text" id="pid"><br>
+        <label>Name of product</label><br>
+        <input type="text" id="name"><br>
         <label>Picture</label><br>
         <input type="text" id="img"><br>
         <label>Price</label><br>
         <input type="text" id="price">
         <div id="act">
-        	<p id="add">Thêm<p>
-            <p id="edit">Sửa<p>
-            <p id="del">Xóa<p>
+        	<p id="add">Thêm</p>
+            <p id="edit">Sửa</p>
+            <p id="del">Xóa</p>
         </div>
     </div>
 </div>
 <script>
 	const products=[
-    	{id:1, name:"Gấu", price:"100.000", des: "Gấu bông khủng long", img:"https://www.google.com.vn/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fmaskyon2%2Fmeme-cute%2F&psig=AOvVaw0Jf6Nmr2HRNCRJR-DlqCB5&ust=1756630926242000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjQmq2Wso8DFQAAAAAdAAAAABAE"},
-        {id:2, name:"Gấu", price:"100.000", des: "Gấu bông khủng long", img:"https://www.google.com.vn/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fmaskyon2%2Fmeme-cute%2F&psig=AOvVaw0Jf6Nmr2HRNCRJR-DlqCB5&ust=1756630926242000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjQmq2Wso8DFQAAAAAdAAAAABAE"},
-        {id:3, name:"Gấu", price:"100.000", des: "Gấu bông khủng long", img:"https://www.google.com.vn/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fmaskyon2%2Fmeme-cute%2F&psig=AOvVaw0Jf6Nmr2HRNCRJR-DlqCB5&ust=1756630926242000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjQmq2Wso8DFQAAAAAdAAAAABAE"},
-        {id:4, name:"Gấu", price:"100.000", des: "Gấu bông khủng long", img:"https://www.google.com.vn/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fmaskyon2%2Fmeme-cute%2F&psig=AOvVaw0Jf6Nmr2HRNCRJR-DlqCB5&ust=1756630926242000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjQmq2Wso8DFQAAAAAdAAAAABAE"},]
+    	{id:1, name:"Gấu", price:"100.000", des: "Gấu bông", img:"https://cdn1.concung.com/2023/03/61977-99389-large_mobile/gau-bong-mom-long-xu-cao-cap-animo-tn.jpg"},
+        {id:2, name:"Ch1ck", price:"100.000", des: "Lau ga hay lau thai", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHGouiJKPPD2QhNa90ujT0-y_dqw7NNz97EA&s"},
+        {id:3, name:"P4nda", price:"100.000", des: "Chay deadline", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV51nrlqlXe8Xb6U_5kp7zpQatxNoWU-T1-Q&s"},
+        {id:4, name:"Snak3", price:"100.000", des: "Ran ckua", img:"https://i.pinimg.com/736x/3a/10/b5/3a10b5ffd4864b211bd0421b9dfb6ffa.jpg"},]
 	const container = document.getElementById("plist");
 	function Display() {
     	container.innerHTML="";
@@ -74,27 +77,62 @@ input#Find{
           let div=document.createElement("div");
           div.classList.add("product");
           div.innerHTML=`
-              <img src="${products[i].img}" alt="${products[i].name}">
+              <img src="${products[i].img}" alt="${products[i].name}" width="50px" height="50px">
               <h3>${products[i].name}</h3>
-              <p class="price">${products[i].price}</p
+              <p class="price">${products[i].price}</p>
               <button onclick="mua(${products[i].id})">Mua ngay</button>
     	`;
         container.appendChild(div);
     	};
-    Display();    
     }
-    let add = document.getElementById("add");
-    add.addEventListener("click",()=>{
-        add.style.color="black";
+    Display(); 
+    function getValue(){
+    	return {
+        	id: parseInt(document.getElementById("pid").value),
+            name: document.getElementById("name").value,
+            img: document.getElementById("img").value,
+            price: document.getElementById("price").value,
+        };
     }
-    let edit = document.getElementById("edit");
-    edit.addEventListener("click",()=>{
-        edit.style.color="black";
-    }
-    let del = document.getElementById("del");
-    del.addEventListener("click",()=>{
-        del.style.color="black";
-    } 
+    let a = document.getElementById("add");
+    a.addEventListener("click",()=>{
+        a.style.color="black";  
+        const {name, img, price} = getValue();
+        const newP = {
+        	id: products.length+1,
+            name, img, price,
+            des: "nothing",
+        };
+        products.push(newP);
+        Display();
+    });
+    let e = document.getElementById("edit");
+    e.addEventListener("click",()=>{
+        e.style.color="black";
+        const {id, name, img, price}=getvalue();
+        const idx=products.findIndex(p=>p.id===id);
+        if(idx!==-1) {
+        	if(name) products[idx].name=name;
+            if(img) products[idx].img=img;
+            if(price) products[idx].price=price;
+            Display();
+        }
+        else 
+        	alert("Khong tim thay"+id);
+    });
+    let d = document.getElementById("del");
+    d.addEventListener("click",()=>{
+        d.style.color="black";
+        const {id}=getValue();
+        const idx=products.findIndex(p=>p.id===id);
+        if(idx!==-1){
+        	products.splice(idx,1);
+            Display();
+        }
+        else
+        	alert("khong tim thay");
+    });
 </script>
 </body>
 </html>
+
